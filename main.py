@@ -4,7 +4,7 @@ from discord.ext import commands
 import datetime
 import time
 
-client = commands.Bot(command_prefix='.')
+client = commands.Bot(command_prefix='$')
 
 time_window_milliseconds = 5000
 max_msg_per_window = 5
@@ -15,13 +15,22 @@ author_msg_times = {}
 async def unban(ctx,member:discord.Member):
     if member == ctx.message.author:
         await ctx.channel.send("You cannot unban yourself")
-        await ctx.channel.send(member)
         return
 
     user = member
     role = discord.utils.get(user.guild.roles, name="jail")
     await user.remove_roles(role)
-    await ctx.channel.send("No More Jail")
+    await ctx.channel.send("No More Jail for " + member.name)
+
+@client.command(pass_context = True)
+async def numword(ctx, *message):
+    if not message: #nothing is passed after the command
+        return await ctx.channel.send("**Please pass in required arguments**") 
+
+    res = len(message)
+    # printing result
+    await ctx.channel.send("The number of words in message are : " +  str(res))
+    
 
 @client.event
 async def on_ready():
@@ -59,10 +68,14 @@ async def on_message(ctx):
     # might be trying to update this at the same time. Not sure though.
 
     if len(author_msg_times[author_id]) > max_msg_per_window:
-        await ctx.channel.send(ctx.author.name + " is going to jail for spam")
+        await ctx.channel.send(ctx.author.name + " is going to jail and getting their ass beat for spam")
         user = ctx.author
         role = discord.utils.get(user.guild.roles, name="jail")
+        role1 = discord.utils.get(user.guild.roles, name="Tang")
+        role2 = discord.utils.get(user.guild.roles, name="Niguyuen")
         await user.add_roles(role)
+        
+
 
     
 
