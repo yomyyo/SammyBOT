@@ -71,8 +71,6 @@ async def on_message(ctx):
         await ctx.channel.send(ctx.author.name + " is going to jail and getting their ass beat for spam")
         user = ctx.author
         role = discord.utils.get(user.guild.roles, name="jail")
-        role1 = discord.utils.get(user.guild.roles, name="Tang")
-        role2 = discord.utils.get(user.guild.roles, name="Niguyuen")
         await user.add_roles(role)
         
 
@@ -80,4 +78,4 @@ async def on_message(ctx):
     
 
     
-client.run('ODY5NzQyNTYzMzY2Njc4NTM4.YQCo4g.rujKUg9slVLClX27f2RsMiaaWAU')
+client.run('ODY5NzQyNTYzMzY2Njc4NTM4.YQCo4g.ECxK0ncDb9ykpJ3px5i0xpuRxsA')
